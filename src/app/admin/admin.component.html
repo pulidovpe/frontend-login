@@ -1,0 +1,12 @@
+<div class="container">
+	<p>Dashboard page</p>
+	<h2 class="text-light text-center">{{ currentUser.name }}</h2>
+	<li class="nav-item">
+		<a routerLink="" class="nav-link">Profile</a>
+	</li>
+	<li class="nav-item">
+		<a routerLink="/" class="nav-link" (click)="handleLogout()">Logout</a>
+	</li>
+</div>
+
+<!-- <router-outlet></router-outlet> -->
