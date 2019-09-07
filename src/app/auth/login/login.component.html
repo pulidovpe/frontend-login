@@ -1,23 +1,43 @@
 <div class="container">
 	<div class="logo">Login</div>
 	<div class="login-item">
-		<form #myform="ngForm" (ngSubmit)="login(myform)" class="form form-login">
+		<form [formGroup]="loginForm" class="form form-login" (ngSubmit)="login()">
+
 			<div class="form-field">
-				<label class="user" for="login-email"><span class="hidden">Email</span></label>
-				<input name="email" id="login-email" type="email" class="form-input" placeholder="Email" required ngModel>
+				<label class="user"><span class="hidden">Email</span></label>
+				<input type="email" placeholder="Email" formControlName="email" class="form-control" />				
+			</div>
+			<div *ngIf="formControls.email.invalid && (formControls.email.dirty || formControls.email.touched)"
+				class="text-light badge-danger my-2 py-2">
+				<div *ngFor="let validation of user_validation_messages.email">
+					<div style="font-size: smaller !important; color: red;"
+						*ngIf="formControls.email.hasError(validation.type) && (formControls.email.dirty || formControls.email.touched)">
+						{{validation.message}}
+					</div>
+				</div>
 			</div>
 
 			<div class="form-field">
-				<label class="lock" for="login-password"><span class="hidden">Password</span></label>
-				<input name="password" id="login-password" type="password" class="form-input" placeholder="Password" required ngModel>
+				<label class="lock"><span class="hidden">Password</span></label>
+				<input type="password" placeholder="Password" formControlName="password" class="form-control" />
+			</div>
+			<div *ngIf="formControls.password.invalid && (formControls.password.dirty || formControls.password.touched)"
+				class="text-light badge-danger my-2 py-2">
+				<div *ngFor="let validation of user_validation_messages.password">
+					<div style="font-size: smaller !important; color: red;"
+						*ngIf="formControls.password.hasError(validation.type) && (formControls.password.dirty || formControls.password.touched)">
+						{{validation.message}}
+					</div>
+				</div>
 			</div>
 
 			<div class="form-field">
-				<input type="submit" value="Log in">
+				<input type="submit" [disabled]="!loginForm.valid" value="Log in">
 			</div>
-			<div class="form-field ">
-				<a routerLink="/auth/register" >REGISTER</a>
+			<div class="btn-floating float-right">
+				<a routerLink="/auth/register" >Register</a>
 			</div>
+
 		</form>
 	</div>
 </div>
