@@ -1,28 +1,57 @@
 <div class="container">
 	<div class="logo">Create a new account!</div>
 	<div class="register-item">
-		<form #myform="ngForm" (ngSubmit)="register(myform)" class="form form-register">
+		<form [formGroup]="registerForm" class="form form-register" (ngSubmit)="register()">
 
 			<div class="form-field">
-				<label class="user" for="register-fullname"><span class="hidden">Full Name</span></label>
-				<input name="fullname" id="register-fullname" type="text" class="form-input" placeholder="Full Name" ngModel required>
+				<label class="user"><span class="hidden">Full name</span></label>
+				<input type="text" placeholder="Full name" formControlName="fullname" class="form-control" />
 			</div>
+			<div *ngIf="formControls.fullname.invalid && (formControls.fullname.dirty || formControls.fullname.touched)"
+				class="text-light badge-danger my-2 py-2">
+				<div *ngFor="let validation of user_validation_messages.fullname">
+					<div style="font-size: smaller !important; color: red;top: -5px;"
+						*ngIf="formControls.fullname.hasError(validation.type) && (formControls.fullname.dirty || formControls.fullname.touched)">
+						{{validation.message}}
+					</div>
+				</div>
+			</div>
+			
 			<div class="form-field">
-				<label class="user" for="register-email"><span class="hidden">Email</span></label>
-				<input name="email" id="register-email" type="email" class="form-input" placeholder="Email" ngModel required>
+				<label class="user"><span class="hidden">Email</span></label>
+				<input type="email" placeholder="Email" formControlName="email" class="form-control" />
+			</div>
+			<div *ngIf="formControls.email.invalid && (formControls.email.dirty || formControls.email.touched)"
+				class="text-light badge-danger my-2 py-2">
+				<div *ngFor="let validation of user_validation_messages.email">
+					<div style="font-size: smaller !important; color: red;"
+						*ngIf="formControls.email.hasError(validation.type) && (formControls.email.dirty || formControls.email.touched)">
+						{{validation.message}}
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-field">
+				<label class="lock"><span class="hidden">Password</span></label>
+				<input type="password" placeholder="Password" formControlName="password" class="form-control" />
+			</div>
+			<div *ngIf="formControls.password.invalid && (formControls.password.dirty || formControls.password.touched)"
+				class="text-light badge-danger my-2 py-2">
+				<div *ngFor="let validation of user_validation_messages.password">
+					<div style="font-size: smaller !important; color: red;"
+						*ngIf="formControls.password.hasError(validation.type) && (formControls.password.dirty || formControls.password.touched)">
+						{{validation.message}}
+					</div>
+				</div>
 			</div>
 
 			<div class="form-field">
-				<label class="lock" for="register-password"><span class="hidden">Password</span></label>
-				<input name="password" id="register-password" type="password" class="form-input" placeholder="Password" ngModel required>
+				<input type="submit" [disabled]="!registerForm.valid" value="Register">
+			</div>
+			<div class="btn-floating float-right">
+				<a routerLink="/auth/login" >Log In</a>
 			</div>
 
-			<div class="form-field">
-				<input type="submit" value="Register">
-			</div>
-			<div class="form-field float-right">
-				<a routerLink="/auth/login" >LOG IN</a>
-			</div>
 		</form>
 	</div>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { User } from '../auth/models/user';
 import { AuthService } from '../auth/auth.service';
 
@@ -10,17 +10,20 @@ import { AuthService } from '../auth/auth.service';
 })
 export class AdminComponent implements OnInit {
 
-	currentUser = {};
+	currentUser = {
+		name: 'Usuario'
+	};
 
-	constructor(private authService: AuthService) {
+	constructor(private authService: AuthService, private router: Router) {
 		this.currentUser = this.authService.getCurrentUser();
 	}
 
 	ngOnInit() {
 	}
 
-	handleLogout() {
+	logout() {
 		this.authService.signOut();
+		this.router.navigateByUrl('/login');
 	}
 
 }
