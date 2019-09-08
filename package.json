@@ -1,10 +1,11 @@
 {
-  "name": "frontend",
+  "name": "frontend-login",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build-prod": "ng build --configuration=$BUILD_CONFIGURATION",
     "test": "ng test",
     "test:ci": "ng test --watch=false --browsers=ChromeHeadlessNoSandbox",
     "lint": "ng lint",
