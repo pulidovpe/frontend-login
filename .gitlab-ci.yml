@@ -2,7 +2,8 @@ image: node:10.16.3
 stages:
   - install
   - test
-#  - deploy
+  - build
+  - deploy
 
 install-dep:
   stage: install
@@ -32,23 +33,31 @@ test-app:
   only:
     - branches
 
-# pages:
-#   stage: deploy
-#   dependencies:
-#     - build
-#   cache:
-#     policy: pull
-#   paths:
-#     - node_modules/
-#   script:
-#     - mkdir .public
-#     - cp -r * .public
-#     - mv .public public
+build-app:
+  stage: build
+  variables:
+    BUILD_CONFIGURATION: 'production'
+  dependencies:
+    - install-dep
+  script:
+    - npm run build-prod
+  artifacts:
+    expire_in: 1hr
+    paths:
+    - dist/
 
-#   artifacts:
-#     paths:
-#     - public
-#   only:
-#     - branches
-
-
+pages:
+  stage: deploy
+  dependencies:
+    - build-app
+  script:
+    - mkdir public
+    - mv ./dist/frontend-login/* ./public/
+  artifacts:
+    paths:
+    - public
+  environment:
+    name: production
+    url: https://pulidovpe.gitlab.io/frontend-login
+  only:
+    - branches
