@@ -52,11 +52,12 @@ pages:
     - build-app
   script:
     - mkdir public
-    - mv ./dist/frontend/* ./public/
+    - mv ./dist/frontend-login/* ./public/
   artifacts:
     paths:
     - public
   environment:
     name: production
+    url: https://pulidovpe.gitlab.io/frontend-login
   only:
     - branches
