@@ -51,8 +51,8 @@ pages:
   dependencies:
     - build-app
   script:
-    - mkdir .public
-    - mv ./dist/frontend-login/* ./public/
+    - mkdir public
+    - mv ./dist/frontend/* ./public/
   artifacts:
     paths:
     - public
