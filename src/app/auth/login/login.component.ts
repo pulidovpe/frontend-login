@@ -37,8 +37,8 @@ export class LoginComponent implements OnInit {
          password: [null, Validators.compose([
             Validators.required,
             Validators.minLength(6),
-            Validators.maxLength(30),
-            Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,30}$/)
+            Validators.maxLength(30)//,
+            //Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,30}$/)
          ])]
 		});
 	}

@@ -23,7 +23,7 @@ export class AdminComponent implements OnInit {
 
 	logout() {
 		this.authService.signOut();
-		this.router.navigateByUrl('/login');
+		this.router.navigateByUrl('/auth/login');
 	}
 
 }
